@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Wattsonic Container Loading V1
 
 A local 3D container loading web tool.
@@ -56,3 +57,7 @@ This project is now runtime-CDN based (Three.js + jsPDF), so deployment is stati
 - CTU Code: load distribution, stack stability, and securing-risk checks
 - ISO 668 / ISO 1496: dimensional and rated payload/gross checks
 - CSC Convention: plate and periodic examination confirmations
+=======
+# loading
+Wattsonic Products Loading into containers
+>>>>>>> d6bf20a4329111067943e270196a6ad376bdb39c
