@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Container Planner 3D</title>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.183.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.183.0/examples/jsm/"
+        }
+      }
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="panel side-panel">
+        <div class="brand-row">
+          <div class="brand-pill">Wattsonic Logistics</div>
+          <h1>Container Planner 3D</h1>
+          <p>Set product demand, run Auto Plan, or drag pallet specs into the 3D container.</p>
+        </div>
+
+        <section class="card control-card">
+          <label for="container-type">Container Type</label>
+          <select id="container-type"></select>
+          <div id="container-quick" class="container-quick"></div>
+          <label for="max-weight">Max Payload (kg)</label>
+          <input id="max-weight" type="number" min="1000" step="100" readonly />
+          <label for="plan-strategy">Demand Planning Strategy</label>
+          <select id="plan-strategy">
+            <option value="max_units">Max Units</option>
+            <option value="space_first">Max Space Utilization</option>
+            <option value="min_pallets">Min Pallet Count</option>
+          </select>
+          <div class="inline-data-head">Container Data</div>
+          <div id="container-data" class="container-data"></div>
+        </section>
+
+        <section class="card product-mix-card">
+          <h2>Product Demand</h2>
+          <div class="btn-row product-actions">
+            <button id="start-tour" class="btn btn-ghost" type="button">Start Tour</button>
+            <button id="products-all" class="btn btn-ghost" type="button">Select All</button>
+            <button id="products-none" class="btn btn-ghost" type="button">Clear</button>
+            <button id="auto-plan" class="btn btn-primary" type="button" title="Demand mode: plan by demand quantities and strategy">Plan by Demand</button>
+          </div>
+          <p class="action-help"><strong>Plan by Demand</strong> uses demand quantities and planning strategy.</p>
+          <div id="product-mix" class="product-mix"></div>
+        </section>
+
+        <section class="card algo-card">
+          <h2>Algorithm Trace</h2>
+          <p>Live planning logic and key selection steps.</p>
+          <div id="algo-trace" class="algo-trace"></div>
+        </section>
+
+        <section class="card pallet-card">
+          <h2>Pallet Library</h2>
+          <p>Desktop: drag and drop. Mobile: tap a card, then tap the scene to place.</p>
+          <div id="pallet-list" class="pallet-list"></div>
+        </section>
+      </aside>
+
+      <main class="panel viewport-panel">
+        <header class="status-bar">
+          <div class="stat-item">
+            <span>Pallet Count</span>
+            <strong id="stat-pallets">0</strong>
+          </div>
+          <div class="stat-item">
+            <span>Total Weight</span>
+            <strong id="stat-weight">0 kg</strong>
+          </div>
+          <div class="stat-item">
+            <span>Weight Utilization</span>
+            <strong id="stat-weight-util">0%</strong>
+          </div>
+          <div class="stat-item">
+            <span>Footprint Usage</span>
+            <strong id="stat-footprint">0%</strong>
+          </div>
+          <div class="stat-item plan-total" id="plan-total-wrap" hidden>
+            <span>Total Containers Needed</span>
+            <strong id="plan-total">1</strong>
+          </div>
+        </header>
+
+        <div class="container-tabs" id="container-tabs"></div>
+
+        <div id="viewport-wrap" class="viewport-wrap">
+          <canvas id="planner-canvas" aria-label="3D container viewport"></canvas>
+          <aside class="color-legend" id="color-legend"></aside>
+          <aside class="load-card" id="load-card">
+            <div class="load-card-head">
+              <span>Live Load Summary</span>
+            </div>
+            <div class="load-grid">
+              <div class="load-item">
+                <span>Base Units</span>
+                <strong id="load-base-units">0</strong>
+              </div>
+              <div class="load-item">
+                <span>Pallet Count</span>
+                <strong id="load-pallet-count">0</strong>
+              </div>
+            </div>
+            <div class="load-metric">
+              <div class="metric-row">
+                <span>Loading Rate</span>
+                <strong id="load-rate">0.0%</strong>
+              </div>
+              <div class="metric-track"><div id="load-rate-bar" class="metric-fill"></div></div>
+            </div>
+            <div class="load-metric">
+              <div class="metric-row">
+                <span>Weight Rate</span>
+                <strong id="weight-rate">0.0%</strong>
+              </div>
+              <div class="metric-track"><div id="weight-rate-bar" class="metric-fill weight"></div></div>
+            </div>
+            <div class="load-products">
+              <div class="load-products-title">Loaded Products</div>
+              <div id="load-products-list" class="load-products-list"></div>
+            </div>
+          </aside>
+          <div class="viewport-overlay">
+            <button id="export-pdf" class="btn btn-dark viewport-export-btn" type="button">Download PDF</button>
+            <button id="clear-all" class="btn btn-ghost viewport-clear-btn" type="button">Clear Container</button>
+          </div>
+        </div>
+
+        <section class="card summary-card">
+          <h2>Loading Summary</h2>
+          <div id="summary-table" class="summary-table"></div>
+        </section>
+
+        <section class="card compliance-card">
+          <h2>Compliance Checks (CTU / ISO / CSC)</h2>
+          <div id="compliance-list" class="compliance-list"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@4.2.0/dist/jspdf.umd.min.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

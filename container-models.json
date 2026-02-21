@@ -1,0 +1,50 @@
+{
+  "20GP": {
+    "label": "20' GP",
+    "lengthMm": 5890,
+    "widthMm": 2300,
+    "heightMm": 2390,
+    "tareKg": 2250,
+    "maxGrossKg": 30480,
+    "maxPayloadKg": 28230,
+    "model": {
+      "shellColor": "#dfe7f7",
+      "edgeColor": "#465b80",
+      "ribCount": 18,
+      "ribDepthMm": 26,
+      "cornerPostMm": 72
+    }
+  },
+  "40GP": {
+    "label": "40' GP",
+    "lengthMm": 11960,
+    "widthMm": 2300,
+    "heightMm": 2390,
+    "tareKg": 3780,
+    "maxGrossKg": 30480,
+    "maxPayloadKg": 26700,
+    "model": {
+      "shellColor": "#d9e5fb",
+      "edgeColor": "#4a5b88",
+      "ribCount": 36,
+      "ribDepthMm": 26,
+      "cornerPostMm": 72
+    }
+  },
+  "40HQ": {
+    "label": "40' HQ",
+    "lengthMm": 11960,
+    "widthMm": 2300,
+    "heightMm": 2570,
+    "tareKg": 3980,
+    "maxGrossKg": 30480,
+    "maxPayloadKg": 26500,
+    "model": {
+      "shellColor": "#d6e3fb",
+      "edgeColor": "#3e5787",
+      "ribCount": 36,
+      "ribDepthMm": 28,
+      "cornerPostMm": 74
+    }
+  }
+}
